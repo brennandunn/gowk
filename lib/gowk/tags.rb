@@ -15,7 +15,9 @@ module Gowk
     end
     
     class Tag
-      attr_accessor :name, :parent, :block
+      include Contexts
+      
+      attr_accessor :name, :parent, :block, :options
       
       def initialize(name, parent, &block)
         self.name = name
@@ -26,6 +28,11 @@ module Gowk
       def full_name
         prefix = parent.respond_to?(:full_name) ? parent.full_name : nil
         [prefix, name.to_s].compact.join(':')
+      end
+      
+      def invoke(options = {})
+        self.options = { :context => :default }.merge!(options)
+        instance_eval(&block)
       end
       
     end
