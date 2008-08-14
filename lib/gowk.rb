@@ -4,6 +4,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'gowk/tags'
 require 'gowk/namespaces'
 require 'gowk/bundle'
+require 'gowk/render'
 
 module Gowk
   

@@ -39,5 +39,19 @@ class TestNamespaces < Test::Unit::TestCase
     end
     
   end
-
+  
+  context 'readable namespace and task names' do
+    
+    should 'have a single namespace reflect itself' do
+      BasicTags.namespace(:fruits) {}
+      assert_equal 'fruits', BasicTags.namespaces[:fruits].full_name
+    end
+    
+    should 'have nested namespaces be joined by colons' do
+      BasicTags.namespace(:fruits) { namespace(:melons) {} }
+      assert_equal 'fruits:melons', BasicTags.namespaces[:fruits].namespaces[:melons].full_name
+    end
+    
+  end
+  
 end
