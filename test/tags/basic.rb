@@ -18,12 +18,26 @@ class BasicTags < Gowk::Bundle
     world
   end
   
-  namespace :system do
+  namespace :counting do
     
+    tag :one do
+      @count = 1
+    end
+    
+    tag :two, :before => ['one'] do
+      @count += 1
+    end
+    
+    tag :three, :before => ['two'] do
+      @count += 1
+    end
+    
+  end
+  
+  namespace :system do
     tag :uname do
       
     end
-    
   end
   
 end

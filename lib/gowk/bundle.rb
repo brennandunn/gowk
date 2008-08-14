@@ -1,10 +1,14 @@
 module Gowk
   class Bundle
+    include Contexts
     extend Namespaces, Tags
     
     class << self
       
       def find_tag(tag)
+        tag = case tag
+                when Array : tag.join(':')
+              end
         breadcrumbs = tag.to_s.split(':')
         tail  = breadcrumbs.pop.to_sym
         

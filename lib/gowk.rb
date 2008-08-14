@@ -9,9 +9,10 @@ require 'gowk/render'
 
 module Gowk
   
-  def self.render_tag(tag, options = {})
-    tag = Gowk::Bundle.find_tag(tag)
+  def self.render_tag(*attrs)
+    options = attrs.last.is_a?(::Hash) ? attrs.pop : {}
+    tag = Gowk::Bundle.find_tag(attrs) or raise ArgumentError, "cannot find tag: #{attrs}"
     tag.invoke(options)
   end
-  
+    
 end

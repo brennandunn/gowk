@@ -11,13 +11,21 @@ class TestRender < Test::Unit::TestCase
     
   end
   
-  context 'output for contexts' do
+  context 'output with contexts' do
     
     should 'be a cunning linguist' do
       assert_equal 'hello world in english', Gowk.render_tag(:i18n_hello_world)
       assert_equal 'hello world in espanol', Gowk.render_tag(:i18n_hello_world, :context => :spanish)
     end
         
+  end
+  
+  context 'output with callbacks' do
+    
+    should 'count to three' do
+      assert_equal 3, Gowk.render_tag(:counting, :three)
+    end
+    
   end
   
 end
