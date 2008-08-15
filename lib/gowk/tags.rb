@@ -33,17 +33,17 @@ module Gowk
       
       def invoke(options = {})
         self.options = { :context => :default }.merge!(options)
-        execute_callbacks(:before)
+        execute_hooks(:before)
         instance_eval(&block)
       end
       
       
       private
       
-      def execute_callbacks(key)
+      def execute_hooks(key)
         return unless tag_options[key]
-        [tag_options[key]].flatten.each do |callback|
-          tag = parent.tags[callback.to_sym]
+        [tag_options[key]].flatten.each do |hook|
+          tag = parent.tags[hook.to_sym]
           if tag
             tag.invoke(options)
             copy_instance_variables(tag, self)

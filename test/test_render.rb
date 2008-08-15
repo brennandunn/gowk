@@ -20,10 +20,17 @@ class TestRender < Test::Unit::TestCase
         
   end
   
-  context 'output with callbacks' do
+  context 'output with hooks' do
     
     should 'count to three' do
+      # execution stack: one, two, three
       assert_equal 3, Gowk.render_tag(:counting, :three)
+    end
+    
+    should 'display the counting output differently depending on context' do
+      assert_equal '3', Gowk.render_tag(:counting, :display, :context => :number)
+      assert_equal 'three', Gowk.render_tag(:counting, :display, :context => :word)
+      assert_equal 'iii', Gowk.render_tag(:counting, :display, :context => :roman)
     end
     
   end

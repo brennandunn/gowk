@@ -3,4 +3,5 @@ require 'rubygems'
 require File.dirname(__FILE__) + '/../lib/gowk'
 require 'shoulda'
 
-require 'tags/basic'
+require 'samples/basic'
+require 'samples/html'
